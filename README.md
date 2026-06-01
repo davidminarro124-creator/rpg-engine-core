@@ -1,4 +1,3 @@
-
 # 🎮 RPG Core Engine - Motor de Videojuego 2D por Cuadrícula
 
 Este proyecto implementa la lógica interna de control de un núcleo o motor básico para un videojuego de rol (RPG) medieval en 2D basado en cuadrícula. El diseño se ha realizado de forma asistida por Inteligencia Artificial, priorizando una arquitectura orientada a objetos minimalista, limpia y desacoplada de cualquier interfaz gráfica.
@@ -73,43 +72,33 @@ classDiagram
     MotorJuego "1" --> "*" EntidadVideojuego : Almacena y gestiona
     EntidadVideojuego <|-- Jugador : Hereda de
     EntidadVideojuego <|-- Enemigo : Hereda de
-
-graph LR
-    Jugador((Actor: Jugador))
-    
-    CU01(CU-01: Iniciar Partida)
-    CU02(CU-02: Mover Héroe e Interceptación)
-    
-    Jugador --> CU01
-    Jugador --> CU02
+```
 
 ## 📝 3. Especificación de Casos de Uso
 
 ### CU-01: Iniciar Partida
-* **Objetivo**: Cambiar el estado del motor para comenzar el flujo de simulación del bucle de juego.
-* **Actor Principal**: Jugador.
-* **Precondiciones**: El sistema debe estar inicializado en el estado `MENU`.
-* **Flujo Principal**:
-    1. El jugador solicita iniciar la simulación.
-    2. El motor cambia su parámetro `estadoActual` a `JUGANDO`.
-    3. El sistema imprime por consola el log de confirmación del inicio.
-* **Flujos Alternativos**: No aplica.
-* **Postcondiciones**: El motor pasa a estado `JUGANDO` y queda habilitado el procesamiento de ticks.
-* **Reglas de Negocio**: No se puede cambiar a estado `JUGANDO` si el estado actual es `GAME_OVER`.
+| Campo | Descripción |
+| :--- | :--- |
+| **Nombre** | CU-01: Iniciar Partida |
+| **Objetivo** | Cambiar el estado del motor para comenzar el flujo de simulación del bucle de juego. |
+| **Actor Principal** | Jugador. |
+| **Precondiciones** | El sistema debe estar inicializado en el estado `MENU`. |
+| **Flujo Principal** | 1. El jugador solicita iniciar la simulación.<br>2. El motor cambia su parámetro `estadoActual` a `JUGANDO`.<br>3. El sistema imprime por consola el log de confirmación del inicio. |
+| **Flujos Alternativos** | No aplica. |
+| **Postcondiciones** | El motor pasa a estado `JUGANDO` y queda habilitado el procesamiento de ticks. |
+| **Reglas de Negocio** | No se puede cambiar a estado `JUGANDO` si el estado actual es `GAME_OVER`. |
 
 ### CU-02: Mover Héroe e Interceptación
-* **Objetivo**: Desplazar al jugador por la cuadrícula 2D, provocando la reacción de la IA enemiga y calculando colisiones.
-* **Actor Principal**: Jugador.
-* **Precondiciones**: El motor debe encontrarse en estado `JUGANDO`.
-* **Flujo Principal**:
-    1. El jugador introduce un input simulado (`DERECHA`).
-    2. La clase `Jugador` actualiza sus coordenadas en el tablero.
-    3. El `MotorJuego` ejecuta el método `actualizar()`.
-    4. La entidad `Enemigo` evalúa la posición del jugador, modifica su estado a `PERSEGUIR` y acorta distancias vectoriales hacia él.
-    5. El motor ejecuta el algoritmo matemático AABB, detecta superposición de coordenadas y resta vida al héroe.
-* **Flujos Alternativos**: Si la colisión reduce la vida del jugador a 0 o menos, se invoca inmediatamente el método `verificarGameOver()`.
-* **Postcondiciones**: Las posiciones se actualizan y se penaliza la salud del jugador en caso de colisión física.
-* **Reglas de Negocio**: Una entidad no puede ejecutar movimientos fuera de los límites lógicos establecidos en los parámetros del ciclo.
+| Campo | Descripción |
+| :--- | :--- |
+| **Nombre** | CU-02: Mover Héroe e Interceptación |
+| **Objetivo** | Desplazar al jugador por la cuadrícula 2D, provocando la reacción de la IA enemiga y calculando colisiones. |
+| **Actor Principal** | Jugador. |
+| **Precondiciones** | El motor debe encontrarse en estado `JUGANDO`. |
+| **Flujo Principal** | 1. El jugador introduce un input simulado (`DERECHA`).<br>2. La clase `Jugador` actualiza sus coordenadas en el tablero.<br>3. El `MotorJuego` ejecuta el método `actualizar()`.<br>4. La entidad `Enemigo` evalúa la posición del jugador, modifica su estado a `PERSEGUIR` y acorta distancias vectoriales hacia él.<br>5. El motor ejecuta el algoritmo matemático AABB, detecta superposición de coordenadas y resta vida al héroe. |
+| **Flujos Alternativos** | Si la colisión reduce la vida del jugador a 0 o menos, se invoca inmediatamente el método `verificarGameOver()`. |
+| **Postcondiciones** | Las posiciones se actualizan y se penaliza la salud del jugador en caso de colisión física. |
+| **Reglas de Negocio** | Una entidad no puede ejecutar movimientos fuera de los límites lógicos establecidos en los parámetros del ciclo. |
 
 ---
 
