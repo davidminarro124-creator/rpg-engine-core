@@ -1,4 +1,4 @@
-package juego;
+package src.juego;
 
 /**
  * Representa al héroe del videojuego controlado por comandos.

@@ -1,4 +1,4 @@
-package juego;
+package src.juego;
 
 /**
  * Representa a las amenazas que habitan en la mazmorra.

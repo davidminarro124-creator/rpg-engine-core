@@ -1,4 +1,4 @@
-package juego;
+package src.juego;
 
 /**
  * Clase conductora encargada de simular las acciones y el bucle.

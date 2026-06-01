@@ -1,4 +1,4 @@
-package juego;
+package src.juego;
 
 /**
  * Clase abstracta que representa cualquier elemento del videojuego en la cuadrícula.
